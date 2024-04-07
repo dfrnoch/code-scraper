@@ -1,0 +1,253 @@
+----- index.tsx -----
+import { createSignal, onMount, For, type Component } from "solid-js";
+import Pagination from "./Pagination";
+import TableHead from "./TableHeader";
+import TableRow from "./Row";
+
+export interface Indicies {
+  skip: number;
+  take: number;
+}
+
+interface TableProps<T extends Record<string, unknown>> {
+  columns: Array<{ field: keyof T; header: string }>;
+  rowActions?: Array<{ label: string; onClick: (item: T) => void; icon?: Component }>;
+  loadPage: (indices: Indicies) => Promise<T[]>;
+  totalItems: number;
+  allowedCounts?: number[];
+}
+
+const Table = <T extends Record<string, unknown>>(props: TableProps<T>) => {
+  const [data, setData] = createSignal<T[]>([]);
+
+  const loadData = async (indices: { skip: number; take: number }) => {
+    const newData = await props.loadPage(indices);
+    setData(newData);
+  };
+
+  onMount(async () => {
+    await loadData({ skip: 0, take: props.allowedCounts?.[0] || 10 });
+  });
+
+  return (
+    <div class="flex h-full flex-col justify-between">
+      <table class="min-w-full leading-normal">
+        <TableHead columns={props.columns} hasActions={!!props.rowActions} />
+        <tbody class="overflow-y-auto">
+          <For each={data()}>
+            {(item) => (
+              <TableRow
+                item={item}
+                columns={props.columns}
+                rowActions={props.rowActions?.map((action) => ({
+                  onClick: () => action.onClick(item),
+                  icon: action.icon,
+                }))}
+              />
+            )}
+          </For>
+        </tbody>
+      </table>
+      <Pagination allowedCounts={props.allowedCounts} itemCount={props.totalItems} onIndexChange={loadData} />
+    </div>
+  );
+};
+
+export default Table;
+
+
+----- Pagination.tsx -----
+import { useI18n } from "@/i18n";
+import { SegmentedControl } from "@/shared/components/SegmentedControl";
+import { FiChevronLeft, FiChevronRight } from "solid-icons/fi";
+import { createSignal } from "solid-js";
+import type { Indicies } from ".";
+
+interface PaginationProps {
+  itemCount: number;
+  allowedCounts?: number[];
+  onIndexChange: (indices: Indicies) => void;
+}
+
+const Pagination = (props: PaginationProps) => {
+  const [pageNo, setPageNo] = createSignal(1);
+  const [count, setCount] = createSignal(props.allowedCounts?.[0] || 10);
+  const [t] = useI18n();
+
+  const maxPages = () => Math.ceil(props.itemCount / count());
+
+  const filteredCounts = () => {
+    return (props.allowedCounts || [10, 14, 50, -1]).filter(filterCount);
+  };
+
+  const filterCount = (c: number) => {
+    if (c !== -1 && props.itemCount < c) {
+      return false;
+    }
+
+    if (c === -1 && props.itemCount < (props.allowedCounts?.[0] || 10)) {
+      return false;
+    }
+
+    return true;
+  };
+
+  const setPageNoHandler = (value: number) => {
+    value = Number.parseInt(String(value));
+    if (Number.isNaN(value)) {
+      return;
+    }
+
+    setPageNo(Math.min(Math.max(1, value), maxPages()));
+    emitIndices();
+  };
+
+  const setCountHandler = (c: number) => {
+    setPageNo(1);
+    if (c === -1) {
+      c = props.itemCount;
+    }
+    setCount(c);
+    emitIndices();
+  };
+
+  const emitIndices = () => {
+    const indices = getSliceIndices();
+    props.onIndexChange(indices);
+  };
+
+  const getSliceIndices = () => {
+    const skip = (pageNo() - 1) * count();
+    const take = count();
+    return { skip, take };
+  };
+
+  return (
+    <div class="grid grid-cols-3 text-primary text-sm select-none items-center" style="height: 50px">
+      {/* Length Display */}
+      <div class="justify-self-start">
+        {`${(pageNo() - 1) * count() + 1} - ${Math.min(pageNo() * count(), props.itemCount)}`}
+      </div>
+
+      {/* Pagination Selector */}
+      <div class="flex gap-2 items-center justify-self-center">
+        <FiChevronLeft
+          class={`w-4 h-4 rtl-rotate-180 ${pageNo() > 1 ? "text-primary cursor-pointer" : "text-transparent"}`}
+          onClick={() => setPageNoHandler(Math.max(1, pageNo() - 1))}
+        />
+        <div class="flex gap-2 bg-secondary rounded h-22px">
+          <input
+            type="number"
+            class="w-8 text-end outline-none bg-transparent "
+            value={pageNo()}
+            min="1"
+            max={maxPages()}
+            onChange={(e) => setPageNoHandler(e.target.valueAsNumber)}
+            onInput={(e) => setPageNoHandler(e.target.valueAsNumber)}
+          />
+          <p>/</p>
+          <p class="w-8 flex items-center">{maxPages()}</p>
+        </div>
+        <FiChevronRight
+          class={`w-4 h-4 rtl-rotate-180 ${pageNo() < maxPages() ? "text-primary cursor-pointer" : "text-transparent"}`}
+          onClick={() => setPageNoHandler(Math.min(maxPages(), pageNo() + 1))}
+        />
+      </div>
+
+      {/* Count Selector */}
+      <div class="justify-self-end">
+        <SegmentedControl
+          options={filteredCounts().map((c) => ({
+            id: String(c),
+            label: c === -1 ? t("table.all") : String(c),
+          }))}
+          onChange={(value) => setCountHandler(Number(value))}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Pagination;
+
+
+----- TableHeader.tsx -----
+import { For } from "solid-js";
+
+interface TableHeadProps<T> {
+  columns: Array<{ field: keyof T; header: string }>;
+  hasActions: boolean;
+}
+
+const TableHead = <T,>(props: TableHeadProps<T>) => {
+  return (
+    <thead>
+      <tr class="text-left bg-[#fff] dark:bg-#353536 shadow-menu-border">
+        <For each={props.columns}>
+          {(column, index) => (
+            <th
+              class={`px-3 py-1 text-primary text-sm tracking-wider  ${index() === 0 ? "rounded-l-lg" : ""} ${
+                index() === props.columns.length - 1 && !props.hasActions ? "rounded-r-lg " : ""
+              }`}
+            >
+              {column.header}
+            </th>
+          )}
+        </For>
+        {props.hasActions && <th class="px-3 py-1 text-primary text-sm tracking-wider rounded-r-lg">Actions</th>}
+      </tr>
+    </thead>
+  );
+};
+
+export default TableHead;
+
+
+----- ActionButton.tsx -----
+import type { Component } from "solid-js";
+import { Dynamic } from "solid-js/web";
+
+interface ActionButtonProps {
+  onClick: () => void;
+  icon?: Component;
+}
+
+const ActionButton: Component<ActionButtonProps> = (props) => {
+  return (
+    <button type="button" class="text-default w-5 h-5 bg-red/0" onClick={props.onClick}>
+      <Dynamic component={props.icon} />
+    </button>
+  );
+};
+
+export default ActionButton;
+
+
+----- Row.tsx -----
+import { type Component, For, Show } from "solid-js";
+import ActionButton from "./ActionButton";
+
+interface TableRowProps<T> {
+  item: T;
+  columns: Array<{ field: keyof T; header: string }>;
+  rowActions?: Array<{ onClick: (item: T) => void; icon?: Component }>;
+}
+
+const TableRow = <T,>(props: TableRowProps<T>) => {
+  return (
+    <tr class="border-b border-default">
+      <For each={props.columns}>{(column) => <td class="px-3 py-2">{String(props.item[column.field])}</td>}</For>
+      <Show when={props.rowActions}>
+        <td class="px-3 py-2 flex flex-row gap-2 items-center">
+          <For each={props.rowActions}>
+            {(action) => <ActionButton onClick={() => action.onClick(props.item)} icon={action.icon} />}
+          </For>
+        </td>
+      </Show>
+    </tr>
+  );
+};
+
+export default TableRow;
+
+

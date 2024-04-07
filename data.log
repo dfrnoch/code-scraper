@@ -1,0 +1,11 @@
+Reading .gitignore patterns from: ../../ts/accounting/src/screens/Dashboard/components/Table/
+No .gitignore file found in: "../../ts/accounting/src/screens/Dashboard/components/Table/"
+Creating output file: data.txt
+Processing files in: ../../ts/accounting/src/screens/Dashboard/components/Table/
+Processing folder: "../../ts/accounting/src/screens/Dashboard/components/Table/"
+Processing file: index.tsx
+Processing file: Pagination.tsx
+Processing file: TableHeader.tsx
+Processing file: ActionButton.tsx
+Processing file: Row.tsx
+Processing completed successfully.
