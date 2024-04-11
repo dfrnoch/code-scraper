@@ -1,11 +1,88 @@
-Reading .gitignore patterns from: ../../ts/accounting/src/screens/Dashboard/components/Table/
-No .gitignore file found in: "../../ts/accounting/src/screens/Dashboard/components/Table/"
+Reading .gitignore patterns from: ../../ts/accounting/src/screens/Dashboard/
+No .gitignore file found in: "../../ts/accounting/src/screens/Dashboard/"
 Creating output file: data.txt
-Processing files in: ../../ts/accounting/src/screens/Dashboard/components/Table/
-Processing folder: "../../ts/accounting/src/screens/Dashboard/components/Table/"
+Processing files in: ../../ts/accounting/src/screens/Dashboard/
+Processing folder: "../../ts/accounting/src/screens/Dashboard/"
 Processing file: index.tsx
-Processing file: Pagination.tsx
-Processing file: TableHeader.tsx
-Processing file: ActionButton.tsx
-Processing file: Row.tsx
+Skipping file without extension: "../../ts/accounting/src/screens/Dashboard/.DS_Store"
+Recursively processing directory: "../../ts/accounting/src/screens/Dashboard/components"
+Processing folder: "../../ts/accounting/src/screens/Dashboard/components"
+Recursively processing directory: "../../ts/accounting/src/screens/Dashboard/components/Sidebar"
+Processing folder: "../../ts/accounting/src/screens/Dashboard/components/Sidebar"
+Processing file: components/Sidebar/index.tsx
+Processing file: components/Sidebar/Section.tsx
+Recursively processing directory: "../../ts/accounting/src/screens/Dashboard/components/Sidebar/Profile"
+Processing folder: "../../ts/accounting/src/screens/Dashboard/components/Sidebar/Profile"
+Processing file: components/Sidebar/Profile/Button.tsx
+Processing file: components/Sidebar/Button.tsx
+Recursively processing directory: "../../ts/accounting/src/screens/Dashboard/components/Popup"
+Processing folder: "../../ts/accounting/src/screens/Dashboard/components/Popup"
+Processing file: components/Popup/Popup.tsx
+Recursively processing directory: "../../ts/accounting/src/screens/Dashboard/components/Form"
+Processing folder: "../../ts/accounting/src/screens/Dashboard/components/Form"
+Processing file: components/Form/index.tsx
+Processing file: components/Form/Section.tsx
+Processing file: components/Form/Dropdown.tsx
+Processing file: components/Form/Table.tsx
+Processing file: components/Form/Input.tsx
+Processing file: components/Tabs.tsx
+Skipping file without extension: "../../ts/accounting/src/screens/Dashboard/components/.DS_Store"
+Processing file: components/Container.tsx
+Processing file: components/StatBox.tsx
+Recursively processing directory: "../../ts/accounting/src/screens/Dashboard/components/PageHeader"
+Processing folder: "../../ts/accounting/src/screens/Dashboard/components/PageHeader"
+Processing file: components/PageHeader/index.tsx
+Processing file: components/PageHeader/HeaderButton.tsx
+Recursively processing directory: "../../ts/accounting/src/screens/Dashboard/components/Table"
+Processing folder: "../../ts/accounting/src/screens/Dashboard/components/Table"
+Processing file: components/Table/index.tsx
+Processing file: components/Table/Pagination.tsx
+Processing file: components/Table/TableHeader.tsx
+Processing file: components/Table/ActionButton.tsx
+Processing file: components/Table/Row.tsx
+Processing file: components/Box.tsx
+Processing file: components/StatusIcon.tsx
+Recursively processing directory: "../../ts/accounting/src/screens/Dashboard/pages"
+Processing folder: "../../ts/accounting/src/screens/Dashboard/pages"
+Processing file: pages/index.tsx
+Recursively processing directory: "../../ts/accounting/src/screens/Dashboard/pages/Settings"
+Processing folder: "../../ts/accounting/src/screens/Dashboard/pages/Settings"
+Processing file: pages/Settings/index.tsx
+Recursively processing directory: "../../ts/accounting/src/screens/Dashboard/pages/Settings/components"
+Processing folder: "../../ts/accounting/src/screens/Dashboard/pages/Settings/components"
+Processing file: pages/Settings/components/Toolbar.tsx
+Skipping file without extension: "../../ts/accounting/src/screens/Dashboard/pages/.DS_Store"
+Recursively processing directory: "../../ts/accounting/src/screens/Dashboard/pages/Sales"
+Processing folder: "../../ts/accounting/src/screens/Dashboard/pages/Sales"
+Recursively processing directory: "../../ts/accounting/src/screens/Dashboard/pages/Sales/Invoices"
+Processing folder: "../../ts/accounting/src/screens/Dashboard/pages/Sales/Invoices"
+Processing file: pages/Sales/Invoices/index.tsx
+Processing file: pages/Sales/Invoices/ManageInvoice.tsx
+Recursively processing directory: "../../ts/accounting/src/screens/Dashboard/pages/Sales/Schedules"
+Processing folder: "../../ts/accounting/src/screens/Dashboard/pages/Sales/Schedules"
+Processing file: pages/Sales/Schedules/index.tsx
+Recursively processing directory: "../../ts/accounting/src/screens/Dashboard/pages/Sales/Templates"
+Processing folder: "../../ts/accounting/src/screens/Dashboard/pages/Sales/Templates"
+Processing file: pages/Sales/Templates/index.tsx
+Recursively processing directory: "../../ts/accounting/src/screens/Dashboard/pages/Other"
+Processing folder: "../../ts/accounting/src/screens/Dashboard/pages/Other"
+Recursively processing directory: "../../ts/accounting/src/screens/Dashboard/pages/Other/Clients"
+Processing folder: "../../ts/accounting/src/screens/Dashboard/pages/Other/Clients"
+Processing file: pages/Other/Clients/index.tsx
+Processing file: pages/Other/Clients/ManageClient.tsx
+Processing file: pages/Other/Clients/ClientDetail.tsx
+Processing file: pages/Other/Reports.tsx
+Recursively processing directory: "../../ts/accounting/src/screens/Dashboard/pages/Other/Templates"
+Processing folder: "../../ts/accounting/src/screens/Dashboard/pages/Other/Templates"
+Processing file: pages/Other/Templates/index.tsx
+Processing file: pages/Other/Templates/ManageTemplate.tsx
+Recursively processing directory: "../../ts/accounting/src/screens/Dashboard/pages/Purchase"
+Processing folder: "../../ts/accounting/src/screens/Dashboard/pages/Purchase"
+Skipping file without extension: "../../ts/accounting/src/screens/Dashboard/pages/Purchase/.DS_Store"
+Recursively processing directory: "../../ts/accounting/src/screens/Dashboard/pages/Purchase/Expenses"
+Processing folder: "../../ts/accounting/src/screens/Dashboard/pages/Purchase/Expenses"
+Processing file: pages/Purchase/Expenses/index.tsx
+Recursively processing directory: "../../ts/accounting/src/screens/Dashboard/pages/Purchase/ReceivedInvoices"
+Processing folder: "../../ts/accounting/src/screens/Dashboard/pages/Purchase/ReceivedInvoices"
+Processing file: pages/Purchase/ReceivedInvoices/index.tsx
 Processing completed successfully.
