@@ -24,17 +24,17 @@
 ### Using Cargo
 
 ```bash
-cargo install --git https://github.com/dfrnoch/code_scraper
+cargo install --git https://github.com/dfrnoch/code-scraper
 ```
 
 ### Downloading from GitHub
 
-Every new version will be automatically compiled and available for download in the [releases page](https://github.com/dfrnoch/code_scraper/releases).
+Every new version will be automatically compiled and available for download in the [releases page](https://github.com/dfrnoch/code-scraper/releases).
 
 ## Usage
 
 ```bash
-code_scraper <source_folder> [custom_ignore_file] [--log]
+code-scraper <source_folder> [custom_ignore_file] [--log]
 ```
 
 - `<source_folder>`: The path to the source directory containing the code files to be extracted.
@@ -55,11 +55,11 @@ Code Scraper for AI generates an output file named `output.txt` in the current d
 
 ## Create a Bug Report
 
-If you encounter an error message or run into an issue, please [create an issue](https://github.com/dfrnoch/code_scraper/issues). Your effort is valued and will help improve the tool for other users.
+If you encounter an error message or run into an issue, please [create an issue](https://github.com/dfrnoch/code-scraper/issues). Your effort is valued and will help improve the tool for other users.
 
 ## Submit a Feature Request
 
-If you have an idea for a new feature or enhancement, please [submit a feature request](https://github.com/dfrnoch/code_scraper/issues).
+If you have an idea for a new feature or enhancement, please [submit a feature request](https://github.com/dfrnoch/code-scraper/issues).
 
 ## Contributing
 

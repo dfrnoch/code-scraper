@@ -1,8 +1,8 @@
 [package]
-name = "code_scraper"
+name = "code-scraper"
 version = "1.1.0"
 edition = "2021"
-repository = "https://github.com/dfrnoch/code_scraper"
+repository = "https://github.com/dfrnoch/code-scraper"
 
 [dependencies]
 clap = { version = "4.5.4", features = ["derive"] }
